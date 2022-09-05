@@ -10,6 +10,8 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
 
+  margin: 0 10%;
+
   height: ${convertPixelToRem(105)};
   padding: ${convertPixelToRem(32)} 0;
 `
