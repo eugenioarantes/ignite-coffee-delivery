@@ -5,7 +5,7 @@ export const CardContainer = styled.div`
   width: ${convertPixelToRem(256)};
   height: ${convertPixelToRem(310)};
 
-  background: #f3f2f2;
+  background: ${(props) => props.theme['gray-200']};
   border-radius: 6px 36px;
 
   margin-right: ${convertPixelToRem(32)};
@@ -16,6 +16,11 @@ export const CardContainer = styled.div`
     display: flex;
     margin: 0 auto;
     margin-top: ${convertPixelToRem(-18)};
+  }
+
+  :hover {
+    transform: scale(1.03);
+    background: ${(props) => props.theme['gray-300']};
   }
 `
 

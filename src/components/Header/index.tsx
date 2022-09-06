@@ -13,11 +13,11 @@ export function Header() {
         <NavLink to="/" title="Localização">
           <ButtonContainer $color="purple">
             <MapPin weight="fill" />
-            <span> Porto Alegre, RS</span>
+            <span> Belo Horizonte, MG</span>
           </ButtonContainer>
         </NavLink>
 
-        <NavLink to="/history" title="Carrinho">
+        <NavLink to="/shopping-cart" title="Carrinho">
           <ButtonContainer $color="yellow">
             <ShoppingCart weight="fill" />
           </ButtonContainer>
