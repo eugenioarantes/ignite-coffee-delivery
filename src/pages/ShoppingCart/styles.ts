@@ -182,6 +182,7 @@ export const ContentShoppingCart = styled.div`
 export const OrdersContainer = styled.div`
   height: ${convertPixelToRem(200)};
   overflow-y: scroll;
+  box-shadow: 2px 2px 0px 0px ${(props) => props.theme['gray-400']};
 `
 
 export const CoffeeCard = styled.div`
@@ -194,6 +195,7 @@ export const CoffeeCard = styled.div`
 
   :last-child {
     border-bottom: none;
+    margin-bottom: 0;
   }
 
   img {
