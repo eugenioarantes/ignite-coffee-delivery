@@ -9,10 +9,21 @@ export const ShoppingCartContainer = styled.div`
   display: flex;
   gap: ${convertPixelToRem(32)};
   margin: 0 10%;
+  margin-top: ${convertPixelToRem(30)};
 `
 
 export const DeliveryInformationContainer = styled.div`
   width: 60%;
+
+  h1 {
+    font-family: 'Baloo 2';
+    font-weight: 700;
+    font-size: ${convertPixelToRem(18)};
+    line-height: 130%;
+    color: ${(props) => props.theme['gray-800']};
+
+    margin-bottom: ${convertPixelToRem(15)};
+  }
 `
 
 export const PersonalInformation = styled.div`
@@ -145,12 +156,24 @@ export const PaymentButton = styled.button`
 `
 
 export const SelectedCoffeesContainer = styled.div`
+  width: 40%;
+
+  h1 {
+    font-family: 'Baloo 2';
+    font-weight: 700;
+    font-size: ${convertPixelToRem(18)};
+    line-height: 130%;
+    color: ${(props) => props.theme['gray-800']};
+
+    margin-bottom: ${convertPixelToRem(15)};
+  }
+`
+
+export const ContentShoppingCart = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${convertPixelToRem(30)};
   gap: ${convertPixelToRem(24)};
-
-  width: 40%;
 
   background: ${(props) => props.theme['gray-200']};
   border-radius: 6px 44px;

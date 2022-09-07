@@ -13,6 +13,7 @@ import {
 import {
   CityInformationsContainer,
   CoffeeCard,
+  ContentShoppingCart,
   DeliveryInformationContainer,
   Form,
   HeaderInformation,
@@ -33,6 +34,7 @@ export const ShoppingCart: React.FC = () => {
   return (
     <ShoppingCartContainer>
       <DeliveryInformationContainer>
+        <h1>Complete seu pedido</h1>
         <PersonalInformation>
           <HeaderInformation $colorIcon="yellow">
             <div>
@@ -107,49 +109,57 @@ export const ShoppingCart: React.FC = () => {
       </DeliveryInformationContainer>
 
       <SelectedCoffeesContainer>
-        <OrdersContainer>
-          {CoffeeList.map((item) => {
-            return (
-              <CoffeeCard key={item.id}>
-                <img src={item.imageURL} alt="" />
+        <h1>Cafés selecionados</h1>
+        <ContentShoppingCart>
+          <OrdersContainer>
+            {CoffeeList.map((item) => {
+              return (
+                <CoffeeCard key={item.id}>
+                  <img src={item.imageURL} alt="" />
 
-                <div className="orderContainer">
-                  <div className="orderHeader">
-                    <span>{item.name}</span>
-                    <strong>R$ {item.price}</strong>
+                  <div className="orderContainer">
+                    <div className="orderHeader">
+                      <span>{item.name}</span>
+                      <strong>R$ {item.price}</strong>
+                    </div>
+
+                    <div className="orderCommand">
+                      <Input
+                        type="number"
+                        widthPX={70}
+                        heightPX={32}
+                        max={999}
+                      />
+                      <button type="button">
+                        <Trash size={15} />
+                        <span>Remover</span>
+                      </button>
+                    </div>
                   </div>
+                </CoffeeCard>
+              )
+            })}
+          </OrdersContainer>
 
-                  <div className="orderCommand">
-                    <Input type="number" widthPX={70} heightPX={32} max={999} />
-                    <button type="button">
-                      <Trash size={15} />
-                      <span>Remover</span>
-                    </button>
-                  </div>
-                </div>
-              </CoffeeCard>
-            )
-          })}
-        </OrdersContainer>
+          <SummationContainer>
+            <div>
+              <span>Total de itens</span>
+              <span className="price">R$ 29,70</span>
+            </div>
 
-        <SummationContainer>
-          <div>
-            <span>Total de itens</span>
-            <span className="price">R$ 29,70</span>
-          </div>
+            <div>
+              <span>Entrega</span>
+              <span className="price">R$ 3,50</span>
+            </div>
 
-          <div>
-            <span>Entrega</span>
-            <span className="price">R$ 3,50</span>
-          </div>
+            <div>
+              <strong>Total</strong>
+              <strong>R$33,20</strong>
+            </div>
 
-          <div>
-            <strong>Total</strong>
-            <strong>R$33,20</strong>
-          </div>
-
-          <button type="button">Confirmar Pedido</button>
-        </SummationContainer>
+            <button type="button">Confirmar Pedido</button>
+          </SummationContainer>
+        </ContentShoppingCart>
       </SelectedCoffeesContainer>
     </ShoppingCartContainer>
   )
