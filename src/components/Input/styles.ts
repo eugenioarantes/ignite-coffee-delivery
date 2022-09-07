@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 interface InputProps {
   $widthPX: number
+  $heightPX: number
   $optional: boolean
 }
 
@@ -16,7 +17,10 @@ export const InputContainer = styled.input<InputProps>`
       width: ${convertPixelToRem($widthPX)};
     `};
 
-  height: ${convertPixelToRem(45)};
+  ${({ $heightPX }) =>
+    css`
+      height: ${convertPixelToRem($heightPX)};
+    `};
 
   background: ${(props) => props.theme['gray-250']};
 

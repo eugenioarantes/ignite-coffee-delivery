@@ -147,7 +147,7 @@ export const PaymentButton = styled.button`
 export const SelectedCoffeesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: ${convertPixelToRem(40)};
+  padding: ${convertPixelToRem(30)};
   gap: ${convertPixelToRem(24)};
 
   width: 40%;
@@ -158,12 +158,17 @@ export const SelectedCoffeesContainer = styled.div`
 
 export const OrdersContainer = styled.div`
   height: ${convertPixelToRem(200)};
-  background: wheat;
-  overflow: scroll;
+  /* background: wheat; */
+  overflow-y: scroll;
 `
 
 export const CoffeeCard = styled.div`
   display: flex;
+  padding: ${convertPixelToRem(8)} 0;
+  margin-right: ${convertPixelToRem(16)};
+  margin-bottom: ${convertPixelToRem(24)};
+  gap: ${convertPixelToRem(24)};
+  border-bottom: 2px solid ${(props) => props.theme['gray-400']};
 
   img {
     width: ${convertPixelToRem(64)};
@@ -173,6 +178,7 @@ export const CoffeeCard = styled.div`
   .orderContainer {
     display: flex;
     flex-direction: column;
+    flex: 1;
   }
 
   .orderHeader {
@@ -182,6 +188,9 @@ export const CoffeeCard = styled.div`
 
   .orderCommand {
     display: flex;
+    margin-top: ${convertPixelToRem(8)};
+    gap: ${convertPixelToRem(8)};
+    margin-bottom: ${convertPixelToRem(24)};
 
     button {
       display: flex;
@@ -203,6 +212,10 @@ export const CoffeeCard = styled.div`
       text-transform: uppercase;
 
       color: ${(props) => props.theme['gray-700']};
+    }
+
+    svg {
+      color: ${(props) => props.theme['purple-500']};
     }
   }
 `

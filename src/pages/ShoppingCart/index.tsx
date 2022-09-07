@@ -108,18 +108,19 @@ export const ShoppingCart: React.FC = () => {
 
       <SelectedCoffeesContainer>
         <OrdersContainer>
-          {/* Mapear os pedidos de cafes do carrinho */}
           {CoffeeList.map((item) => {
             return (
               <CoffeeCard key={item.id}>
                 <img src={item.imageURL} alt="" />
+
                 <div className="orderContainer">
                   <div className="orderHeader">
                     <span>{item.name}</span>
-                    <strong>{item.price}</strong>
+                    <strong>R$ {item.price}</strong>
                   </div>
+
                   <div className="orderCommand">
-                    <Input type="number" widthPX={70} />
+                    <Input type="number" widthPX={70} heightPX={32} max={999} />
                     <button type="button">
                       <Trash size={15} />
                       <span>Remover</span>
