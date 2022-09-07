@@ -40,7 +40,9 @@ export const CoffeeCard: FC<CoffeeListProps> = ({ coffee }) => {
       <PurchaseContainer>
         <Price>
           <span>R$</span>
-          <strong>{coffee.price}</strong>
+          <strong>
+            {coffee.price.toLocaleString('pt-br', { minimumFractionDigits: 2 })}
+          </strong>
         </Price>
 
         <Checkout>

@@ -182,6 +182,7 @@ export const ContentShoppingCart = styled.div`
 export const OrdersContainer = styled.div`
   height: ${convertPixelToRem(200)};
   overflow-y: scroll;
+  border-radius: 10px;
   box-shadow: 2px 2px 0px 0px ${(props) => props.theme['gray-400']};
 `
 
@@ -199,8 +200,8 @@ export const CoffeeCard = styled.div`
   }
 
   img {
-    width: ${convertPixelToRem(64)};
-    height: ${convertPixelToRem(64)};
+    width: ${convertPixelToRem(54)};
+    height: ${convertPixelToRem(54)};
   }
 
   .orderContainer {

@@ -120,7 +120,12 @@ export const ShoppingCart: React.FC = () => {
                   <div className="orderContainer">
                     <div className="orderHeader">
                       <span>{item.name}</span>
-                      <strong>R$ {item.price}</strong>
+                      <strong>
+                        {item.price.toLocaleString('pt-br', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        })}
+                      </strong>
                     </div>
 
                     <div className="orderCommand">

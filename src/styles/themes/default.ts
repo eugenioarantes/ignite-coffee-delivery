@@ -20,4 +20,7 @@ export const defaultTheme = {
   'yellow-500': '#DBAC2C',
   'yellow-600': '#E9A135',
   'yellow-700': '#C47F17',
+
+  'border-linear-gradient':
+    'linear-gradient(102.89deg, #dbac2c 2.61%, #8047f8 98.76%)',
 }
