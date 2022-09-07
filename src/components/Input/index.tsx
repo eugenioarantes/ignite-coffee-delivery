@@ -36,6 +36,7 @@ export const Input: React.FC<InputProps> = ({
       $widthPX={widthPX}
       $heightPX={heightPX}
       $optional
+      $inputType={type}
     />
   )
 }

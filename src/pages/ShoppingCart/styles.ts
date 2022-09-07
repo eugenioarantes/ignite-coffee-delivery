@@ -181,7 +181,6 @@ export const ContentShoppingCart = styled.div`
 
 export const OrdersContainer = styled.div`
   height: ${convertPixelToRem(200)};
-  /* background: wheat; */
   overflow-y: scroll;
 `
 
@@ -192,6 +191,10 @@ export const CoffeeCard = styled.div`
   margin-bottom: ${convertPixelToRem(24)};
   gap: ${convertPixelToRem(24)};
   border-bottom: 2px solid ${(props) => props.theme['gray-400']};
+
+  :last-child {
+    border-bottom: none;
+  }
 
   img {
     width: ${convertPixelToRem(64)};
@@ -225,7 +228,7 @@ export const CoffeeCard = styled.div`
       width: 91px;
       height: 32px;
 
-      background: #e6e5e5;
+      background: ${(props) => props.theme['gray-400']};
       border: 0;
       border-radius: 6px;
 
@@ -235,6 +238,13 @@ export const CoffeeCard = styled.div`
       text-transform: uppercase;
 
       color: ${(props) => props.theme['gray-700']};
+
+      transition: background-color 0.5s;
+
+      :hover {
+        background: ${(props) => props.theme['gray-500']};
+        color: ${(props) => props.theme['gray-800']};
+      }
     }
 
     svg {

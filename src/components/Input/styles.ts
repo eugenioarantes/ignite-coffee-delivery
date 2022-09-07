@@ -5,6 +5,7 @@ interface InputProps {
   $widthPX: number
   $heightPX: number
   $optional: boolean
+  $inputType: string
 }
 
 export const InputContainer = styled.input<InputProps>`
@@ -33,4 +34,16 @@ export const InputContainer = styled.input<InputProps>`
 
     color: ${(props) => props.theme['gray-600']};
   }
+
+  ${({ $inputType }) =>
+    $inputType === 'number' &&
+    css`
+      ::-webkit-inner-spin-button {
+        opacity: 1;
+        width: ${convertPixelToRem(30)};
+        height: ${convertPixelToRem(30)};
+
+        cursor: pointer;
+      }
+    `};
 `
