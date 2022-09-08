@@ -10,6 +10,12 @@ export const Container = styled.div`
   margin: 0 10%;
   margin-top: ${convertPixelToRem(80)};
   gap: ${convertPixelToRem(100)};
+
+  align-items: flex-end;
+
+  img {
+    width: 100%;
+  }
 `
 
 export const Content = styled.div`
@@ -49,10 +55,20 @@ export const DeliveryDataContainer = styled.div`
   width: 526px;
   height: 270px;
 
-  border: 1px solid black;
-  border-radius: 6px 36px;
+  position: relative;
 
-  /* background: linear-gradient(102.89deg, #dbac2c 2.61%, #8047f8 98.76%); */
+  ::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 6px 36px;
+    border: 1px solid transparent;
+    background: ${(props) => props.theme['border-linear-gradient']} border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
 `
 
 export const InformationsData = styled.div`

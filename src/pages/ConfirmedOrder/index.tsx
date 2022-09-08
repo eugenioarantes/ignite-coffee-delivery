@@ -51,7 +51,9 @@ const ConfirmedOrder: React.FC = () => {
         </DeliveryDataContainer>
       </Content>
 
-      <img src={motorcycleDelivery} alt="motorcycle delivery" />
+      <div>
+        <img src={motorcycleDelivery} alt="motorcycle delivery" />
+      </div>
     </Container>
   )
 }
