@@ -134,7 +134,7 @@ export const Checkout = styled.div`
     }
   }
 
-  button {
+  a {
     padding: ${convertPixelToRem(8)};
 
     width: ${convertPixelToRem(38)};

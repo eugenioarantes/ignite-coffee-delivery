@@ -13,6 +13,7 @@ import {
   TitleName,
   TypeCoffee,
 } from './styles'
+import { NavLink } from 'react-router-dom'
 
 interface CoffeeListProps {
   coffee: CoffeeListType
@@ -47,9 +48,9 @@ export const CoffeeCard: FC<CoffeeListProps> = ({ coffee }) => {
 
         <Checkout>
           <input type="number" defaultValue={0} min={0} />
-          <button type="button">
+          <NavLink to="/shopping-cart" title="Shopping Cart">
             <ShoppingCart weight="fill" size={22} />
-          </button>
+          </NavLink>
         </Checkout>
       </PurchaseContainer>
     </CardContainer>
