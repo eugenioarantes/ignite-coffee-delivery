@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { IMaskInput } from 'react-imask'
 
@@ -29,8 +29,12 @@ import {
 } from './styles'
 import { Input } from '../../components/Input'
 import { CoffeeList } from '../../server/coffees'
+import { DeliveryContext } from '../../contexts/DeliveryContext'
 
 export const ShoppingCart: React.FC = () => {
+  const { coffeeList, paymentMethod, setCurrentPaymentMethod } =
+    useContext(DeliveryContext)
+
   return (
     <ShoppingCartContainer>
       <DeliveryInformationContainer>
@@ -90,17 +94,26 @@ export const ShoppingCart: React.FC = () => {
           </HeaderInformation>
 
           <PaymentMethods>
-            <PaymentButton>
+            <PaymentButton
+              onClick={() => setCurrentPaymentMethod('credito')}
+              $isSelected={paymentMethod === 'credito'}
+            >
               <CreditCard size={16} />
               <span>Cartão de Crédito</span>
             </PaymentButton>
 
-            <PaymentButton>
+            <PaymentButton
+              onClick={() => setCurrentPaymentMethod('debito')}
+              $isSelected={paymentMethod === 'debito'}
+            >
               <Bank size={16} />
               <span>Cartão de Débito</span>
             </PaymentButton>
 
-            <PaymentButton>
+            <PaymentButton
+              onClick={() => setCurrentPaymentMethod('dinheiro')}
+              $isSelected={paymentMethod === 'dinheiro'}
+            >
               <Money size={16} />
               <span>Dinheiro</span>
             </PaymentButton>
@@ -112,19 +125,23 @@ export const ShoppingCart: React.FC = () => {
         <h1>Cafés selecionados</h1>
         <ContentShoppingCart>
           <OrdersContainer>
-            {CoffeeList.map((item) => {
+            {coffeeList.map((item) => {
+              const positionOnArray = Number(item.id) - 1
               return (
                 <CoffeeCard key={item.id}>
-                  <img src={item.imageURL} alt="" />
+                  <img src={CoffeeList[positionOnArray].imageURL} alt="" />
 
                   <div className="orderContainer">
                     <div className="orderHeader">
                       <span>{item.name}</span>
                       <strong>
-                        {item.price.toLocaleString('pt-br', {
-                          style: 'currency',
-                          currency: 'BRL',
-                        })}
+                        {CoffeeList[positionOnArray].price.toLocaleString(
+                          'pt-br',
+                          {
+                            style: 'currency',
+                            currency: 'BRL',
+                          },
+                        )}
                       </strong>
                     </div>
 
@@ -134,6 +151,7 @@ export const ShoppingCart: React.FC = () => {
                         widthPX={70}
                         heightPX={32}
                         max={999}
+                        defaultValue={item.quantity}
                       />
                       <button type="button">
                         <Trash size={15} />

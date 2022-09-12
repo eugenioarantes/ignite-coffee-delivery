@@ -12,6 +12,7 @@ interface InputProps {
   max?: number
   minLength?: number
   maxLength?: number
+  defaultValue?: string | number
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -24,6 +25,7 @@ export const Input: React.FC<InputProps> = ({
   max,
   minLength = 1,
   maxLength = 80,
+  defaultValue,
 }) => {
   return (
     <InputContainer
@@ -37,6 +39,7 @@ export const Input: React.FC<InputProps> = ({
       $heightPX={heightPX}
       $optional
       $inputType={type}
+      defaultValue={defaultValue}
     />
   )
 }

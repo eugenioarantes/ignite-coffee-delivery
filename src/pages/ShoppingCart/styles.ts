@@ -5,6 +5,10 @@ interface HeaderInformationProps {
   $colorIcon: string
 }
 
+interface PaymentButtonProps {
+  $isSelected: boolean
+}
+
 export const ShoppingCartContainer = styled.div`
   display: flex;
   gap: ${convertPixelToRem(32)};
@@ -126,7 +130,7 @@ export const PaymentMethods = styled.div`
   gap: ${convertPixelToRem(12)};
 `
 
-export const PaymentButton = styled.button`
+export const PaymentButton = styled.button<PaymentButtonProps>`
   display: flex;
   align-items: center;
   padding: ${convertPixelToRem(16)};
@@ -149,6 +153,12 @@ export const PaymentButton = styled.button`
     text-transform: uppercase;
     color: ${(props) => props.theme['gray-700']};
   }
+
+  ${({ $isSelected }) =>
+    $isSelected &&
+    css`
+      box-shadow: 0 0 0 1px ${(props) => props.theme['purple-500']};
+    `};
 
   :focus {
     box-shadow: 0 0 0 1px ${(props) => props.theme['purple-500']};
