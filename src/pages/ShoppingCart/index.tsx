@@ -37,7 +37,6 @@ import { Navigate } from 'react-router-dom'
 import { InputHome } from '../../components/InputHome'
 
 interface AddressFormData {
-  CEP: string
   street: string
   number: number
   neighborhood: string
@@ -46,16 +45,14 @@ interface AddressFormData {
 }
 
 const FORM_INITIAL_VALUES = {
-  CEP: '',
   street: '',
-  number: 0,
+  number: 1,
   neighborhood: '',
   city: '',
   UF: '',
 }
 
 const validator = Yup.object().shape({
-  CEP: Yup.string().required('CEP Obrigatório'),
   street: Yup.string().required('Obrigatório preencher a sua rua'),
   number: Yup.number().required('Obrigatório preencher o número'),
   neighborhood: Yup.string().required('Obrigatório preencher seu bairro'),
@@ -116,8 +113,7 @@ export const ShoppingCart: React.FC = () => {
 
                 <Input
                   type="text"
-                  id="rua"
-                  name="rua"
+                  name="street"
                   placeholder="Rua"
                   widthPX={560}
                   marginBottom={16}
@@ -129,8 +125,7 @@ export const ShoppingCart: React.FC = () => {
                 <NumberAndComplementContainer>
                   <Input
                     type="number"
-                    id="numero"
-                    name="numero"
+                    name="number"
                     placeholder="Número"
                     widthPX={200}
                     min={1}
@@ -141,8 +136,7 @@ export const ShoppingCart: React.FC = () => {
                   />
                   <Input
                     type="text"
-                    id="complemento"
-                    name="complemento"
+                    name="complement"
                     placeholder="Complemento"
                     optional
                     widthPX={348}
@@ -155,8 +149,7 @@ export const ShoppingCart: React.FC = () => {
                 <CityInformationsContainer>
                   <Input
                     type="text"
-                    id="bairro"
-                    name="rua"
+                    name="neighborhood"
                     placeholder="Bairro"
                     widthPX={200}
                     error={errors.neighborhood}
@@ -165,8 +158,7 @@ export const ShoppingCart: React.FC = () => {
                   />
                   <Input
                     type="text"
-                    id="cidade"
-                    name="cidade"
+                    name="city"
                     placeholder="Cidade"
                     widthPX={276}
                     error={errors.city}
@@ -176,8 +168,7 @@ export const ShoppingCart: React.FC = () => {
                   <Input
                     // pattern="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"
                     type="text"
-                    id="uf"
-                    name="uf"
+                    name="UF"
                     placeholder="UF"
                     widthPX={60}
                     minLength={2}

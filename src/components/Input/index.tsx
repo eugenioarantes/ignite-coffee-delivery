@@ -9,7 +9,7 @@ import { InputContainer, Error, Container } from './styles'
 interface InputProps extends FieldAttributes<any> {
   error?: string
   touched?: boolean
-  blur?: (event: FocusEvent) => void
+  blur: (event: FocusEvent) => void
   type: string
   placeholder?: string
   widthPX: number
@@ -20,7 +20,6 @@ interface InputProps extends FieldAttributes<any> {
   minLength?: number
   maxLength?: number
   defaultValue?: string | number
-  onChange?: (id: string, name: string, quantity: number) => void
   coffeeData?: { id: string; name: string }
   padding?: number
   background?: 'gray-250' | 'gray-400'
@@ -43,27 +42,12 @@ export const Input: React.FC<InputProps> = ({
   maxLength = 80,
   defaultValue,
   coffeeData,
-  onChange,
   padding = 12,
   background = 'gray-250',
   marginBottom = 0,
   pattern,
   ...rest
 }) => {
-  const { removeOrderFromList } = useContext(DeliveryContext)
-
-  function handleSetCoffeeOnList(coffeQuantity: string): void {
-    if (!onChange || !coffeeData) return
-
-    const coffeeQuantityNumber = Number(coffeQuantity)
-
-    onChange(coffeeData.id, coffeeData.name, coffeeQuantityNumber)
-
-    if (coffeeQuantityNumber === 0) {
-      removeOrderFromList(coffeeData.id)
-    }
-  }
-
   const { turnOn: handleFocus, turnOff: handleFocusOff } = useToggle()
 
   const errored = error && touched
@@ -71,7 +55,7 @@ export const Input: React.FC<InputProps> = ({
   const handleBlur = (event: FocusEvent): void => {
     handleFocusOff()
 
-    if (blur) blur(event)
+    blur(event)
   }
 
   return (
@@ -93,7 +77,7 @@ export const Input: React.FC<InputProps> = ({
           type={type}
           placeholder={placeholder}
           defaultValue={defaultValue}
-          onChange={(event: any) => handleSetCoffeeOnList(event.target.value)}
+          // onChange={(event: any) => handleSetCoffeeOnList(event.target.value)}
           onFocus={handleFocus}
           onBlur={(event: FocusEvent) => handleBlur(event)}
           {...rest}

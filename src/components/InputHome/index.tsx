@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { DeliveryContext } from '../../contexts/DeliveryContext'
 
 import { InputContainer } from './styles'
 
@@ -25,12 +26,18 @@ export const InputHome: React.FC<InputHomeProps> = ({
   coffeeData,
   onChange,
 }) => {
+  const { removeOrderFromList } = useContext(DeliveryContext)
+
   function handleSetCoffeeOnList(coffeQuantity: string): void {
     if (!onChange || !coffeeData) return
 
     const coffeeQuantityNumber = Number(coffeQuantity)
 
     onChange(coffeeData.id, coffeeData.name, coffeeQuantityNumber)
+
+    if (coffeeQuantityNumber === 0) {
+      removeOrderFromList(coffeeData.id)
+    }
   }
 
   return (
