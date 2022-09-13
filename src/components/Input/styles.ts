@@ -6,44 +6,70 @@ interface InputProps {
   $heightPX: number
   $optional: boolean
   $inputType: string
+  $padding: number
+  $background: 'gray-250' | 'gray-400'
+  $marginBottom: number
 }
 
-export const InputContainer = styled.input<InputProps>`
+export const Container = styled.div`
   display: flex;
-  padding: ${convertPixelToRem(12)};
-  margin-bottom: ${convertPixelToRem(16)};
+  flex-direction: column;
+`
 
-  ${({ $widthPX }) =>
-    css`
-      width: ${convertPixelToRem($widthPX)};
-    `};
+export const InputContainer = styled.div<InputProps>`
+  display: flex;
+  input {
+    margin-bottom: ${convertPixelToRem(16)};
 
-  ${({ $heightPX }) =>
-    css`
-      height: ${convertPixelToRem($heightPX)};
-    `};
+    ${({ $marginBottom }) =>
+      css`
+        margin-bottom: ${convertPixelToRem($marginBottom)};
+      `};
+    ${({ $widthPX }) =>
+      css`
+        width: ${convertPixelToRem($widthPX)};
+      `};
 
-  background: ${(props) => props.theme['gray-250']};
+    ${({ $heightPX }) =>
+      css`
+        height: ${convertPixelToRem($heightPX)};
+      `};
 
-  border: 1px solid ${(props) => props.theme['gray-400']};
-  border-radius: 4px;
+    ${({ $padding }) =>
+      css`
+        padding: ${convertPixelToRem($padding)};
+      `};
 
-  ::placeholder {
-    font-size: ${convertPixelToRem(15)};
-    line-height: 130%;
+    ${({ $background }) =>
+      css`
+        background: ${(props) => props.theme[$background]};
+      `};
 
-    color: ${(props) => props.theme['gray-600']};
+    border: 1px solid ${(props) => props.theme['gray-400']};
+    border-radius: 5px;
+
+    ::placeholder {
+      font-size: ${convertPixelToRem(15)};
+      line-height: 130%;
+
+      color: ${(props) => props.theme['gray-600']};
+    }
+
+    ${({ $inputType }) =>
+      $inputType === 'number' &&
+      css`
+        ::-webkit-inner-spin-button {
+          opacity: 1;
+          width: ${convertPixelToRem(30)};
+          height: ${convertPixelToRem(30)};
+
+          cursor: pointer;
+        }
+      `};
   }
+`
 
-  ${({ $inputType }) =>
-    $inputType === 'number' &&
-    css`
-      ::-webkit-inner-spin-button {
-        opacity: 1;
-        width: ${convertPixelToRem(30)};
-        height: ${convertPixelToRem(30)};
-
-        cursor: pointer;
-      }
-    `};
+export const Error = styled.small`
+  color: red;
+  padding-left: ${convertPixelToRem(16)};
 `

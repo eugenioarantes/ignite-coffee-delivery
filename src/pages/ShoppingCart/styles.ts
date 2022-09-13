@@ -1,5 +1,6 @@
 import { convertPixelToRem } from 'css-blocks-styled-components'
 import styled, { css } from 'styled-components'
+import { Form } from 'formik'
 
 interface HeaderInformationProps {
   $colorIcon: string
@@ -9,7 +10,7 @@ interface PaymentButtonProps {
   $isSelected: boolean
 }
 
-export const ShoppingCartContainer = styled.div`
+export const ShoppingCartContainer = styled(Form)`
   display: flex;
   gap: ${convertPixelToRem(32)};
   margin: 0 10%;
@@ -76,7 +77,7 @@ export const HeaderInformation = styled.div<HeaderInformationProps>`
   }
 `
 
-export const Form = styled.form`
+export const AddressInformation = styled.div`
   display: flex;
   flex-direction: column;
 

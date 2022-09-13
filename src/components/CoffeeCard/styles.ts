@@ -110,30 +110,6 @@ export const Checkout = styled.div`
   display: flex;
   gap: ${convertPixelToRem(10)};
 
-  input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: ${convertPixelToRem(8)};
-    gap: ${convertPixelToRem(4)};
-
-    width: ${convertPixelToRem(72)};
-    height: ${convertPixelToRem(38)};
-
-    background: ${(props) => props.theme['gray-400']};
-
-    border: 0;
-    border-radius: 6px;
-
-    ::-webkit-inner-spin-button {
-      opacity: 1;
-      width: ${convertPixelToRem(30)};
-      height: ${convertPixelToRem(30)};
-
-      cursor: pointer;
-    }
-  }
-
   a {
     padding: ${convertPixelToRem(8)};
 

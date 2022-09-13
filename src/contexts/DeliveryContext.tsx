@@ -12,6 +12,8 @@ interface DeliveryContextType {
 
   paymentMethod: string
   setCurrentPaymentMethod: (method: string) => void
+
+  removeOrderFromList: (id: string) => void
 }
 
 export const DeliveryContext = createContext({} as DeliveryContextType)
@@ -46,6 +48,16 @@ export function DeliveryContextProvider({
     setCoffeeList([...coffeeList, { id, name, quantity }])
   }
 
+  function removeOrderFromList(id: string): void {
+    const itemToRemove = coffeeList.find((coffee) => coffee.id === id)
+
+    const newCoffeeList = coffeeList.filter(
+      (item) => item.id !== itemToRemove?.id,
+    )
+
+    setCoffeeList(newCoffeeList)
+  }
+
   return (
     <DeliveryContext.Provider
       value={{
@@ -53,6 +65,7 @@ export function DeliveryContextProvider({
         setCurrentCoffeeList,
         paymentMethod,
         setCurrentPaymentMethod,
+        removeOrderFromList,
       }}
     >
       {children}

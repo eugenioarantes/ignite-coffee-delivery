@@ -15,6 +15,8 @@ import {
 } from './styles'
 import { NavLink } from 'react-router-dom'
 import { DeliveryContext } from '../../contexts/DeliveryContext'
+import { Input } from '../Input'
+import { InputHome } from '../InputHome'
 
 interface CoffeeListProps {
   coffee: CoffeeListType
@@ -28,6 +30,10 @@ export const CoffeeCard: FC<CoffeeListProps> = ({ coffee }) => {
   let haveCoffee = false
 
   if (index !== -1) haveCoffee = true
+
+  function setCoffeeOnList(id: string, name: string, quantity: number): void {
+    setCurrentCoffeeList(id, name, quantity)
+  }
 
   return (
     <CardContainer>
@@ -56,17 +62,15 @@ export const CoffeeCard: FC<CoffeeListProps> = ({ coffee }) => {
         </Price>
 
         <Checkout>
-          <input
+          <InputHome
             type="number"
-            defaultValue={haveCoffee ? coffeeList[index].quantity : 0}
+            widthPX={72}
+            heightPX={38}
             min={0}
-            onChange={(event) =>
-              setCurrentCoffeeList(
-                coffee.id,
-                coffee.name,
-                Number(event.target.value),
-              )
-            }
+            max={999}
+            defaultValue={haveCoffee ? coffeeList[index].quantity : 0}
+            onChange={setCoffeeOnList}
+            coffeeData={{ id: coffee.id, name: coffee.name }}
           />
           <NavLink to="/shopping-cart" title="Shopping Cart">
             <ShoppingCart weight="fill" size={22} />
