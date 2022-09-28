@@ -15,7 +15,6 @@ import {
 } from './styles'
 import { NavLink } from 'react-router-dom'
 import { DeliveryContext } from '../../contexts/DeliveryContext'
-import { Input } from '../Input'
 import { InputHome } from '../InputHome'
 
 interface CoffeeListProps {
@@ -33,6 +32,12 @@ export const CoffeeCard: FC<CoffeeListProps> = ({ coffee }) => {
 
   function setCoffeeOnList(id: string, name: string, quantity: number): void {
     setCurrentCoffeeList(id, name, quantity)
+  }
+
+  const { setCurrentPaymentMethod } = useContext(DeliveryContext)
+
+  const resetPaymentMethod = (): void => {
+    setCurrentPaymentMethod('')
   }
 
   return (
@@ -72,7 +77,11 @@ export const CoffeeCard: FC<CoffeeListProps> = ({ coffee }) => {
             onChange={setCoffeeOnList}
             coffeeData={{ id: coffee.id, name: coffee.name }}
           />
-          <NavLink to="/shopping-cart" title="Shopping Cart">
+          <NavLink
+            to="/shopping-cart"
+            title="Shopping Cart"
+            onClick={resetPaymentMethod}
+          >
             <ShoppingCart weight="fill" size={22} />
           </NavLink>
         </Checkout>

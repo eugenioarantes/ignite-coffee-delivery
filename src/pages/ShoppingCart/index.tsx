@@ -1,7 +1,15 @@
-import React, { useCallback, useContext } from 'react'
+import React, {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 import { IMaskInput } from 'react-imask'
 import * as Yup from 'yup'
+
+import { useNavigate } from 'react-router-dom'
 
 import {
   Bank,
@@ -17,6 +25,7 @@ import {
   CoffeeCard,
   ContentShoppingCart,
   DeliveryInformationContainer,
+  EmptyPaymentMethodWarning,
   HeaderInformation,
   NumberAndComplementContainer,
   OrdersContainer,
@@ -30,10 +39,9 @@ import {
 } from './styles'
 import { Input } from '../../components/Input'
 import { CoffeeList } from '../../server/coffees'
-import { DeliveryContext } from '../../contexts/DeliveryContext'
+import { AddressType, DeliveryContext } from '../../contexts/DeliveryContext'
 import { Formik } from 'formik'
 import { validateFormData } from '../../utils/formValidation'
-import { Navigate } from 'react-router-dom'
 import { InputHome } from '../../components/InputHome'
 
 interface AddressFormData {
@@ -60,25 +68,54 @@ const validator = Yup.object().shape({
   UF: Yup.string().required('Obrigatório preencher seu estado'),
 })
 
+const DELIVERY_VALUE = 3.5
+
 export const ShoppingCart: React.FC = () => {
+  const navigateTo = useNavigate()
+
+  const [cep, setCep] = useState('')
+
   const {
     coffeeList,
     paymentMethod,
     setCurrentPaymentMethod,
     setCurrentCoffeeList,
     removeOrderFromList,
+    setClientAddress,
   } = useContext(DeliveryContext)
 
   function setCoffeeOnList(id: string, name: string, quantity: number): void {
     setCurrentCoffeeList(id, name, quantity)
+    // handleSummationItems()
   }
 
-  const handleSubmit = useCallback(async (formData: AddressFormData) => {
-    const { hasError } = await validateFormData(validator, formData)
+  const handleSummationItems = (): number => {
+    const totalPrice = coffeeList.reduce(
+      (accumulator, coffee, index) =>
+        accumulator + coffee.quantity * CoffeeList[index].price,
+      0,
+    )
 
-    if (hasError) return
-    ;<Navigate to="/confirmed-order" />
-  }, [])
+    return Number(totalPrice.toFixed(2))
+  }
+
+  const handleSubmit = useCallback(
+    async (formData: AddressFormData) => {
+      const { hasError } = await validateFormData(validator, formData)
+
+      if (hasError || paymentMethod === '') {
+        setCurrentPaymentMethod('not-marked')
+        return
+      }
+
+      const addressData: AddressType = { ...formData, CEP: cep }
+
+      setClientAddress(addressData)
+
+      navigateTo('/confirmed-order')
+    },
+    [navigateTo, cep, setClientAddress, paymentMethod, setCurrentPaymentMethod],
+  )
 
   return (
     <Formik
@@ -104,11 +141,13 @@ export const ShoppingCart: React.FC = () => {
                   mask="00.000-000"
                   placeholder="CEP"
                   className="cepInput"
+                  name="CEP"
                   minLength={10}
                   maxLength={10}
-                  // error={errors.CEP}
-                  // touched={touched.CEP}
-                  // blur={handleBlur}
+                  required
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    return setCep(event.target.value)
+                  }}
                 />
 
                 <Input
@@ -166,7 +205,6 @@ export const ShoppingCart: React.FC = () => {
                     blur={handleBlur}
                   />
                   <Input
-                    // pattern="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"
                     type="text"
                     name="UF"
                     placeholder="UF"
@@ -196,8 +234,8 @@ export const ShoppingCart: React.FC = () => {
               <PaymentMethods>
                 <PaymentButton
                   type="button"
-                  onClick={() => setCurrentPaymentMethod('credito')}
-                  $isSelected={paymentMethod === 'credito'}
+                  onClick={() => setCurrentPaymentMethod('Crédito')}
+                  $isSelected={paymentMethod === 'Crédito'}
                 >
                   <CreditCard size={16} />
                   <span>Cartão de Crédito</span>
@@ -205,8 +243,8 @@ export const ShoppingCart: React.FC = () => {
 
                 <PaymentButton
                   type="button"
-                  onClick={() => setCurrentPaymentMethod('debito')}
-                  $isSelected={paymentMethod === 'debito'}
+                  onClick={() => setCurrentPaymentMethod('Débito')}
+                  $isSelected={paymentMethod === 'Débito'}
                 >
                   <Bank size={16} />
                   <span>Cartão de Débito</span>
@@ -214,13 +252,19 @@ export const ShoppingCart: React.FC = () => {
 
                 <PaymentButton
                   type="button"
-                  onClick={() => setCurrentPaymentMethod('dinheiro')}
-                  $isSelected={paymentMethod === 'dinheiro'}
+                  onClick={() => setCurrentPaymentMethod('Dinheiro')}
+                  $isSelected={paymentMethod === 'Dinheiro'}
                 >
                   <Money size={16} />
                   <span>Dinheiro</span>
                 </PaymentButton>
               </PaymentMethods>
+
+              {paymentMethod === 'not-marked' && (
+                <EmptyPaymentMethodWarning>
+                  Por favor escolha um método de pagamento
+                </EmptyPaymentMethodWarning>
+              )}
             </PaymentInformationContainer>
           </DeliveryInformationContainer>
 
@@ -238,13 +282,12 @@ export const ShoppingCart: React.FC = () => {
                         <div className="orderHeader">
                           <span>{item.name}</span>
                           <strong>
-                            {CoffeeList[positionOnArray].price.toLocaleString(
-                              'pt-br',
-                              {
-                                style: 'currency',
-                                currency: 'BRL',
-                              },
-                            )}
+                            {(
+                              CoffeeList[positionOnArray].price * item.quantity
+                            ).toLocaleString('pt-br', {
+                              style: 'currency',
+                              currency: 'BRL',
+                            })}
                           </strong>
                         </div>
 
@@ -275,18 +318,36 @@ export const ShoppingCart: React.FC = () => {
 
               <SummationContainer>
                 <div>
-                  <span>Total de itens</span>
-                  <span className="price">R$ 29,70</span>
+                  <span>Total dos itens</span>
+                  <span className="price">
+                    {handleSummationItems().toLocaleString('pt-br', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })}
+                  </span>
                 </div>
 
                 <div>
                   <span>Entrega</span>
-                  <span className="price">R$ 3,50</span>
+                  <span className="price">
+                    {DELIVERY_VALUE.toLocaleString('pt-br', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })}
+                  </span>
                 </div>
 
                 <div>
                   <strong>Total</strong>
-                  <strong>R$33,20</strong>
+                  <strong>
+                    {(handleSummationItems() + DELIVERY_VALUE).toLocaleString(
+                      'pt-br',
+                      {
+                        style: 'currency',
+                        currency: 'BRL',
+                      },
+                    )}
+                  </strong>
                 </div>
 
                 <button type="submit">Confirmar Pedido</button>

@@ -1,7 +1,8 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
-import React from 'react'
+import React, { useContext } from 'react'
 
 import motorcycleDelivery from '../../assets/motorcycle-delivery.svg'
+import { DeliveryContext } from '../../contexts/DeliveryContext'
 import {
   Container,
   Content,
@@ -11,6 +12,8 @@ import {
 } from './styles'
 
 const ConfirmedOrder: React.FC = () => {
+  const { address, paymentMethod } = useContext(DeliveryContext)
+
   return (
     <Container>
       <Content>
@@ -24,8 +27,9 @@ const ConfirmedOrder: React.FC = () => {
             </Icon>
 
             <span>
-              Entrega em Rua João Daniel Martinelli, 102 Farrapos - Porto
-              Alegre, RS
+              Entrega em Rua {address.street}, {address.number}{' '}
+              {address.neighborhood} - {address.city},{' '}
+              {address.UF.toUpperCase()}
             </span>
           </InformationsData>
 
@@ -45,7 +49,7 @@ const ConfirmedOrder: React.FC = () => {
             </Icon>
             <div>
               <span>Pagamento na entrega</span>
-              <strong>Cartão de Crédito</strong>
+              <strong>{paymentMethod}</strong>
             </div>
           </InformationsData>
         </DeliveryDataContainer>

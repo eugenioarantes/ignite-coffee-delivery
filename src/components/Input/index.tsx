@@ -1,7 +1,6 @@
-import React, { useContext, FocusEvent } from 'react'
+import React, { FocusEvent } from 'react'
 import { Field, FieldAttributes } from 'formik'
 
-import { DeliveryContext } from '../../contexts/DeliveryContext'
 import { useToggle } from '../../hooks/toggle'
 
 import { InputContainer, Error, Container } from './styles'
@@ -9,7 +8,7 @@ import { InputContainer, Error, Container } from './styles'
 interface InputProps extends FieldAttributes<any> {
   error?: string
   touched?: boolean
-  blur: (event: FocusEvent) => void
+  blur?: (event: FocusEvent) => void
   type: string
   placeholder?: string
   widthPX: number
@@ -55,7 +54,7 @@ export const Input: React.FC<InputProps> = ({
   const handleBlur = (event: FocusEvent): void => {
     handleFocusOff()
 
-    blur(event)
+    if (blur) blur(event)
   }
 
   return (

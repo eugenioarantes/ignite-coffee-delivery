@@ -6,6 +6,16 @@ interface CoffeeListType {
   quantity: number
 }
 
+export interface AddressType {
+  CEP: string
+  street: string
+  number: number
+  complement?: string
+  neighborhood: string
+  city: string
+  UF: string
+}
+
 interface DeliveryContextType {
   coffeeList: CoffeeListType[]
   setCurrentCoffeeList: (id: string, name: string, quantity: number) => void
@@ -14,6 +24,9 @@ interface DeliveryContextType {
   setCurrentPaymentMethod: (method: string) => void
 
   removeOrderFromList: (id: string) => void
+
+  address: AddressType
+  setClientAddress: (address: AddressType) => void
 }
 
 export const DeliveryContext = createContext({} as DeliveryContextType)
@@ -28,6 +41,12 @@ export function DeliveryContextProvider({
   const [paymentMethod, setPaymentMethod] = useState('')
 
   const [coffeeList, setCoffeeList] = useState<CoffeeListType[]>([])
+
+  const [address, setAddress] = useState({} as AddressType)
+
+  function setClientAddress(adress: AddressType) {
+    setAddress(adress)
+  }
 
   function setCurrentPaymentMethod(method: string) {
     setPaymentMethod(method)
@@ -66,6 +85,8 @@ export function DeliveryContextProvider({
         paymentMethod,
         setCurrentPaymentMethod,
         removeOrderFromList,
+        address,
+        setClientAddress,
       }}
     >
       {children}

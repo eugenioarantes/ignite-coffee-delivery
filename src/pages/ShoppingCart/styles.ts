@@ -114,21 +114,27 @@ export const CityInformationsContainer = styled.div`
   gap: ${convertPixelToRem(12)};
 `
 
+export const PaymentMethods = styled.div`
+  display: flex;
+  gap: ${convertPixelToRem(12)};
+`
+
+export const EmptyPaymentMethodWarning = styled.small`
+  display: flex;
+  justify-content: center;
+  color: red;
+`
+
 export const PaymentInformationContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${convertPixelToRem(40)};
-  margin: ${convertPixelToRem(12)} 0;
+  margin-top: ${convertPixelToRem(12)} 0;
 
   gap: ${convertPixelToRem(32)};
 
   background: ${(props) => props.theme['gray-200']};
   border-radius: 6px;
-`
-
-export const PaymentMethods = styled.div`
-  display: flex;
-  gap: ${convertPixelToRem(12)};
 `
 
 export const PaymentButton = styled.button<PaymentButtonProps>`
