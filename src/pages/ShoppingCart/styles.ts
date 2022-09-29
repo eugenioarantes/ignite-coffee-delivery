@@ -10,6 +10,70 @@ interface PaymentButtonProps {
   $isSelected: boolean
 }
 
+export const EmptyCartContainer = styled.div`
+  margin: 0 10%;
+  margin-top: ${convertPixelToRem(30)};
+
+  gap: ${convertPixelToRem(20)};
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: ${(props) => props.theme['gray-300']};
+  border-radius: ${convertPixelToRem(15)};
+  height: ${convertPixelToRem(150)};
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: ${convertPixelToRem(8)};
+
+    background: ${(props) => props.theme['purple-700']};
+    color: ${(props) => props.theme.white};
+
+    height: ${convertPixelToRem(34)};
+    width: ${convertPixelToRem(162)};
+
+    font-weight: 500;
+    font-size: ${convertPixelToRem(14)};
+    letter-spacing: 0.2em;
+
+    border-radius: ${convertPixelToRem(3)};
+    border: 0;
+
+    transition: background-color 0.5s ease;
+
+    :hover {
+      background-color: ${(props) => props.theme['purple-500']};
+    }
+
+    svg {
+      font-size: ${convertPixelToRem(20)};
+    }
+  }
+`
+
+export const EmptyCartInformation = styled.div`
+  gap: ${convertPixelToRem(20)};
+
+  display: flex;
+  margin-top: ${convertPixelToRem(12)};
+
+  span {
+    color: ${(props) => props.theme['gray-700']};
+    font-size: ${convertPixelToRem(28)};
+  }
+
+  svg {
+    font-size: ${convertPixelToRem(30)};
+    color: ${(props) => props.theme['gray-700']};
+    margin-bottom: ${convertPixelToRem(5)};
+  }
+`
+
 export const ShoppingCartContainer = styled(Form)`
   display: flex;
   gap: ${convertPixelToRem(32)};

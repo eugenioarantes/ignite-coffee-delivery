@@ -27,6 +27,8 @@ interface DeliveryContextType {
 
   address: AddressType
   setClientAddress: (address: AddressType) => void
+
+  removeAllOrders: () => void
 }
 
 export const DeliveryContext = createContext({} as DeliveryContextType)
@@ -59,8 +61,9 @@ export function DeliveryContextProvider({
       const index = coffeeList.findIndex((coffee) => coffee.id === id)
 
       coffeeList[index] = { id, name, quantity }
+      console.log('entrou')
 
-      setCoffeeList(coffeeList)
+      setCoffeeList([...coffeeList])
       return
     }
 
@@ -77,6 +80,10 @@ export function DeliveryContextProvider({
     setCoffeeList(newCoffeeList)
   }
 
+  function removeAllOrders(): void {
+    setCoffeeList([])
+  }
+
   return (
     <DeliveryContext.Provider
       value={{
@@ -87,6 +94,7 @@ export function DeliveryContextProvider({
         removeOrderFromList,
         address,
         setClientAddress,
+        removeAllOrders,
       }}
     >
       {children}
