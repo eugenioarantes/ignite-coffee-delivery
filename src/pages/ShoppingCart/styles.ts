@@ -83,6 +83,9 @@ export const ShoppingCartContainer = styled(Form)`
 
 export const DeliveryInformationContainer = styled.div`
   width: 60%;
+  > h1 {
+    margin-bottom: ${convertPixelToRem(15)};
+  }
 
   h1 {
     font-family: 'Baloo 2';
@@ -90,8 +93,6 @@ export const DeliveryInformationContainer = styled.div`
     font-size: ${convertPixelToRem(18)};
     line-height: 130%;
     color: ${(props) => props.theme['gray-800']};
-
-    margin-bottom: ${convertPixelToRem(15)};
   }
 `
 
