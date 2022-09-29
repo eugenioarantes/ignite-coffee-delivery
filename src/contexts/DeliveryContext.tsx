@@ -61,7 +61,6 @@ export function DeliveryContextProvider({
       const index = coffeeList.findIndex((coffee) => coffee.id === id)
 
       coffeeList[index] = { id, name, quantity }
-      console.log('entrou')
 
       setCoffeeList([...coffeeList])
       return
