@@ -76,7 +76,6 @@ export const Input: React.FC<InputProps> = ({
           type={type}
           placeholder={placeholder}
           defaultValue={defaultValue}
-          // onChange={(event: any) => handleSetCoffeeOnList(event.target.value)}
           onFocus={handleFocus}
           onBlur={(event: FocusEvent) => handleBlur(event)}
           {...rest}
