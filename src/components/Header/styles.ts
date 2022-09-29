@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 interface ButtonContainerProps {
   $color: 'purple' | 'yellow'
+  $quantity?: number
 }
 
 export const HeaderContainer = styled.header`
@@ -33,6 +34,7 @@ export const ButtonContainer = styled.div<ButtonContainerProps>`
   justify-content: center;
   align-items: center;
   gap: ${convertPixelToRem(4)};
+  position: relative;
 
   svg {
     transition: color 0.5s;
@@ -64,5 +66,28 @@ export const ButtonContainer = styled.div<ButtonContainerProps>`
           color: ${(props) => props.theme['yellow-600']};
         `};
     }
+  }
+
+  :before {
+    content: '';
+
+    ${({ $quantity }) =>
+      $quantity &&
+      css`
+        content: '${$quantity}';
+        position: absolute;
+        bottom: 17px;
+        left: 17px;
+        text-align: center;
+
+        display: block;
+        width: 18px;
+        height: 18px;
+
+        background-color: ${(props) => props.theme['yellow-700']};
+        border-radius: 50%;
+        border: 3px solid ${(props) => props.theme['yellow-700']};
+        color: ${(props) => props.theme.white};
+      `};
   }
 `

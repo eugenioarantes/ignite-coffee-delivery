@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import { DeliveryContext } from '../../contexts/DeliveryContext'
 
 export function Header() {
-  const { setCurrentPaymentMethod } = useContext(DeliveryContext)
+  const { coffeeList, setCurrentPaymentMethod } = useContext(DeliveryContext)
 
   const resetPaymentMethod = (): void => {
     setCurrentPaymentMethod('')
@@ -32,7 +32,7 @@ export function Header() {
           title="Carrinho"
           onClick={resetPaymentMethod}
         >
-          <ButtonContainer $color="yellow">
+          <ButtonContainer $color="yellow" $quantity={coffeeList.length}>
             <ShoppingCart weight="fill" />
           </ButtonContainer>
         </NavLink>
