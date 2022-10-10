@@ -11,7 +11,7 @@
 <h1 align="center">
   <img 
     alt="home-page" 
-    src="https://github.com/eugenioarantes/ignite-coffee-delivery/blob/master/src/assets/home-page.gif" 
+    src="https://github.com/eugenioarantes/ignite-coffee-delivery/blob/master/src/assets/readme-gifs/home-page.gif"
   />
 </h1>
 
@@ -22,6 +22,6 @@
 <h1 align="center">
   <img 
     alt="shopping-cart" 
-    src="https://github.com/eugenioarantes/ignite-coffee-delivery/blob/master/src/assets/shopping-cart.gif" 
+    src="https://github.com/eugenioarantes/ignite-coffee-delivery/blob/master/src/assets/readme-gifs/shopping-cart.gif"
   />
 </h1>
