@@ -1,6 +1,8 @@
-
 <h1 align="center">
     Coffee Delivery Project
+</h1>
+
+<h1 align="center">
     <img alt="coffe-delivery" src="https://github.com/eugenioarantes/ignite-coffee-delivery/blob/master/src/assets/Logo-coffee-delivery.svg" width="250px" />
 </h1>
 
